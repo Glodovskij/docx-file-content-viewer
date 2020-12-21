@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>docx_file_content_viewer.Domain</RootNamespace>
+  </PropertyGroup>
+
+</Project>

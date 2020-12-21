@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>docx_file_content_viewer.Infrastructure.Services</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\docx-file-content-viewer.Domain\docx-file-content-viewer.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
