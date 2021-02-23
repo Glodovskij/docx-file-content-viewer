@@ -1,10 +1,8 @@
 ﻿using docx_file_content_viewer.Domain.Entities;
 using docx_file_content_viewer.Domain.Repositories;
 using docx_file_content_viewer.Infrastructure.Repositories.EF;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace docx_file_content_viewer.Infrastructure.Repositories.Repositories
 {
@@ -24,7 +22,8 @@ namespace docx_file_content_viewer.Infrastructure.Repositories.Repositories
 
         public void Add(DocxFile docxFile)
         {
-            throw new NotImplementedException();
+            _docxDbContext.DocxFiles.Add(docxFile);
+            _docxDbContext.SaveChanges();
         }
 
         public List<DocxFile> Get()
@@ -34,12 +33,13 @@ namespace docx_file_content_viewer.Infrastructure.Repositories.Repositories
 
         public DocxFile Get(int id)
         {
-            throw new NotImplementedException();
+            return _docxDbContext.DocxFiles.Find(id);
         }
 
         public void Remove(DocxFile docxFile)
         {
-            throw new NotImplementedException();
+            _docxDbContext.DocxFiles.Remove(docxFile);
+            _docxDbContext.SaveChanges();
         }
     }
 }

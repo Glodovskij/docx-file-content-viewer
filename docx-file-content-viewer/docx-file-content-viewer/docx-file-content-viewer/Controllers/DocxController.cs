@@ -24,5 +24,19 @@ namespace docx_file_content_viewer.Controllers
         {
             return Ok(_docxFileService.Get());
         }
+
+        [HttpDelete("{id}")]
+        public ActionResult Delete(long id)
+        {
+            return Ok();
+        }
+
+        [HttpGet("{id}")]
+        public ActionResult<DocxFileDTO> Get(long id)
+        {
+            return Ok();
+        }
+
+
     }
 }

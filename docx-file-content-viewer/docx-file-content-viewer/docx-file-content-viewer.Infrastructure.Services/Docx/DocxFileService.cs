@@ -23,7 +23,9 @@ namespace docx_file_content_viewer.Infrastructure.Services.Docx
         {
             return _fileRepository.Get().Select(obj => new DocxFileDTO
             {
-                Author = obj.Author
+                Author = obj.Author,
+                DiscPath = obj.DiscPath,
+                
             }).ToList();
         }
 
