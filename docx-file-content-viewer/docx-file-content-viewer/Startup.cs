@@ -26,7 +26,7 @@ namespace docx_file_content_viewer
         {
             services.AddControllers();
 
-            string connectionString = Configuration.GetConnectionString("ApplicationConnectionWork");
+            string connectionString = Configuration.GetConnectionString("ApplicationDbConnection");
 
             services.AddDbContext<DocxDbContext>(options => options.UseSqlServer(connectionString));
 

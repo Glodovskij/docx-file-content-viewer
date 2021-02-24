@@ -1,11 +1,10 @@
 ﻿using docx_file_content_viewer.Domain.DTOs;
 using docx_file_content_viewer.Domain.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.IO;
+using System.Text;
 
 namespace docx_file_content_viewer.Controllers
 {
@@ -34,6 +33,20 @@ namespace docx_file_content_viewer.Controllers
         [HttpGet("{id}")]
         public ActionResult<DocxFileDTO> Get(long id)
         {
+            return Ok();
+        }
+
+        [HttpPost, DisableRequestSizeLimit]
+        public ActionResult Post()
+        {
+            var files = Request.Form.Files;
+            files[0].OpenReadStream();
+           
+             StreamReader reader = new StreamReader(files[0].OpenReadStream());
+
+            var str = reader.ReadToEnd();
+
+            //using(var stream = new FileStream(files))
             return Ok();
         }
 

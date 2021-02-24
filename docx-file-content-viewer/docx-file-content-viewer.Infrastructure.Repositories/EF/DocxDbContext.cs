@@ -7,6 +7,7 @@ namespace docx_file_content_viewer.Infrastructure.Repositories.EF
     {
         public DocxDbContext(DbContextOptions options) : base(options)
         {
+            Database.EnsureCreated();
         }
 
         public DbSet<DocxFile> DocxFiles {get; set;}

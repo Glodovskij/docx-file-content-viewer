@@ -6,7 +6,7 @@
         public string Author { get; set; }
         public string Size { get; set; }
         public string DiscPath { get; set; }
-        public byte[] FileContent { get; set; }
+        public string FileContent { get; set; } 
         public string Filename { get; set; }
     }
 }
