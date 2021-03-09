@@ -5,4 +5,8 @@
     <RootNamespace>docx_file_content_viewer.Domain</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.4" />
+  </ItemGroup>
+
 </Project>

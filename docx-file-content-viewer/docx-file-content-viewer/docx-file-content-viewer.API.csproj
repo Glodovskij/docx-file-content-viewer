@@ -10,5 +10,9 @@
     <ProjectReference Include="..\docx-file-content-viewer.Infrastructure.Services\docx-file-content-viewer.Infrastructure.Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Helpers\" />
+  </ItemGroup>
+
 
 </Project>

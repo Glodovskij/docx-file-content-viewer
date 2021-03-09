@@ -1,6 +1,7 @@
 ﻿using docx_file_content_viewer.Domain.Entities;
 using docx_file_content_viewer.Domain.Repositories;
 using docx_file_content_viewer.Infrastructure.Repositories.EF;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -17,7 +18,7 @@ namespace docx_file_content_viewer.Infrastructure.Repositories.Repositories
 
         public DocxFileRepository(DocxDbContext docxDbContext)
         {
-            _docxDbContext = docxDbContext;
+            _docxDbContext = docxDbContext ?? throw new ArgumentNullException(nameof(docxDbContext));
         }
 
         public void Add(DocxFile docxFile)

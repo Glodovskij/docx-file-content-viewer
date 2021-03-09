@@ -3,8 +3,8 @@ using docx_file_content_viewer.Domain.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Text;
+using System.Linq;
+using System.Net.Mime;
 
 namespace docx_file_content_viewer.Controllers
 {
@@ -15,7 +15,7 @@ namespace docx_file_content_viewer.Controllers
         private readonly IDocxFileService _docxFileService;
         public DocxController(IDocxFileService fileService)
         {
-            _docxFileService = fileService;
+            _docxFileService = fileService ?? throw new System.ArgumentNullException(nameof(fileService));
         }
 
         [HttpGet]
@@ -25,31 +25,27 @@ namespace docx_file_content_viewer.Controllers
         }
 
         [HttpDelete("{id}")]
-        public ActionResult Delete(long id)
+        public ActionResult Delete(int id)
         {
-            return Ok();
+            _docxFileService.Remove(id);
+            return NoContent();
         }
 
         [HttpGet("{id}")]
-        public ActionResult<DocxFileDTO> Get(long id)
+        public ActionResult Get(int id)
         {
-            return Ok();
+            DocxFileDTO docxFile = _docxFileService.Get(id);
+           
+            return File(Convert.FromBase64String(docxFile.FileContent), MediaTypeNames.Application.Octet, docxFile.Filename);
         }
 
         [HttpPost, DisableRequestSizeLimit]
         public ActionResult Post()
         {
-            var files = Request.Form.Files;
-            files[0].OpenReadStream();
-           
-             StreamReader reader = new StreamReader(files[0].OpenReadStream());
+            _docxFileService.Add(Request.Form.Files.ToList());
 
-            var str = reader.ReadToEnd();
-
-            //using(var stream = new FileStream(files))
             return Ok();
         }
-
 
     }
 }
