@@ -39,7 +39,7 @@ namespace docx_file_content_viewer.Infrastructure.Services.Docx
             return _fileRepository.Get().Select(file => new DocxFileDTO
             {
                 Size = file.Size,
-                FileContent = file.FileContent,
+                FileContent = Convert.FromBase64String(file.FileContent),
                 Filename = file.Filename,
                 ID = file.ID
 
@@ -48,7 +48,15 @@ namespace docx_file_content_viewer.Infrastructure.Services.Docx
 
         public DocxFileDTO Get(int id)
         {
-            return new DocxFileDTO(_fileRepository.Get(id));
+            DocxFile file = _fileRepository.Get(id);
+
+            return new DocxFileDTO
+            {
+                FileContent = Convert.FromBase64String(file.FileContent),
+                Filename = file.Filename,
+                ID = file.ID,
+                Size = file.Size
+            };
         }
 
         public void Remove(int id)
