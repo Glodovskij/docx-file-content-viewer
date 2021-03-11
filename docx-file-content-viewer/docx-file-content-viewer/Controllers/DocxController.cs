@@ -24,14 +24,16 @@ namespace docx_file_content_viewer.Controllers
         [HttpGet]
         public ActionResult<List<DocxFileDTO>> Get()
         {
-            _logger.LogInformation("Get all method called {0}", HttpContext.Request.Path);
+            _logger.Log(LogLevel.Information, $"{LogLevel.Information}: Get all method called {HttpContext.Request.Path} at " +
+                $"{DateTime.UtcNow}");
             return Ok(_docxFileService.Get());
         }
 
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
-            _logger.LogInformation("Delete method {0}", HttpContext.Request.Path);
+            _logger.Log(LogLevel.Information, $"{LogLevel.Information}: Delete method called {HttpContext.Request.Path}" +
+                $" with parameter {nameof(id)} = {id} at {DateTime.UtcNow}");
             _docxFileService.Remove(id);
             return NoContent();
         }
@@ -39,7 +41,8 @@ namespace docx_file_content_viewer.Controllers
         [HttpGet("{id}")]
         public ActionResult Get(int id)
         {
-            _logger.LogInformation("Get method {0}", HttpContext.Request.Path);
+            _logger.Log(LogLevel.Information, $"{LogLevel.Information}: Get method called {HttpContext.Request.Path}" +
+                $" with parameter {nameof(id)} = {id} at {DateTime.UtcNow}");
             DocxFileDTO docxFile = _docxFileService.Get(id);
            
             return File(docxFile.FileContent, MediaTypeNames.Application.Octet, docxFile.Filename);
@@ -48,7 +51,8 @@ namespace docx_file_content_viewer.Controllers
         [HttpPost, DisableRequestSizeLimit]
         public ActionResult Post()
         {
-            _logger.LogInformation("Post method {0}", HttpContext.Request.Path);
+            _logger.Log(LogLevel.Information, $"{LogLevel.Information}: Post method called {HttpContext.Request.Path}" +
+                $" with request parameter {Request.Form.Files.ToList()} at {DateTime.UtcNow}");
             _docxFileService.Add(Request.Form.Files.ToList());
 
             return Ok();

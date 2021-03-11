@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using docx_file_content_viewer.Loggers;
 using Microsoft.Extensions.Logging;
 
 namespace docx_file_content_viewer
@@ -16,7 +17,7 @@ namespace docx_file_content_viewer
                 .ConfigureLogging(logging =>
                 {
                     logging.ClearProviders();
-                    logging.AddConsole();
+                    logging.AddFile("logs.txt");
                 })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
