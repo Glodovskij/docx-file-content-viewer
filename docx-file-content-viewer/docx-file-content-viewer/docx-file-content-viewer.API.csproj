@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AspNetCoreRateLimit" Version="3.2.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\docx-file-content-viewer.Infrastructure.Repositories\docx-file-content-viewer.Infrastructure.Repositories.csproj" />
     <ProjectReference Include="..\docx-file-content-viewer.Infrastructure.Services\docx-file-content-viewer.Infrastructure.Services.csproj" />
   </ItemGroup>

@@ -1,3 +1,4 @@
+using AspNetCoreRateLimit;
 using docx_file_content_viewer.Domain.Repositories;
 using docx_file_content_viewer.Domain.Services;
 using docx_file_content_viewer.Infrastructure.Repositories.EF;
@@ -33,6 +34,16 @@ namespace docx_file_content_viewer
             services.AddTransient<IDocxFileRepository, DocxFileRepository>();
 
             services.AddTransient<IDocxFileService, DocxFileService>();
+
+            //Services for rate request limiting
+            services.AddOptions();
+            services.AddMemoryCache();
+            services.Configure<IpRateLimitOptions>(Configuration.GetSection("IpRateLimit"));
+            services.AddSingleton<IIpPolicyStore, MemoryCacheIpPolicyStore>();
+            services.AddSingleton<IRateLimitCounterStore,MemoryCacheRateLimitCounterStore>();
+            services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
+            services.AddHttpContextAccessor();
+            //**
         }
 
 
@@ -52,6 +63,7 @@ namespace docx_file_content_viewer
                 endpoints.MapControllers();
             });
 
+            app.UseIpRateLimiting();
         }
     }
 }
